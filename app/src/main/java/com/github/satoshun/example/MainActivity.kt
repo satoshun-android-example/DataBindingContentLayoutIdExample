@@ -2,21 +2,20 @@ package com.github.satoshun.example
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.commit
 import com.github.satoshun.example.databinding.MainActBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.main_act) {
+  private lateinit var binding: MainActBinding
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.main_act)
+    binding = bindView()
 
-    val binding: MainActBinding = DataBindingUtil.setContentView(
-      this,
-      R.layout.main_act
-    )
-    supportFragmentManager.commit {
-      add(R.id.container, MainFragment())
+    if (savedInstanceState == null) {
+      supportFragmentManager.commit {
+        add(R.id.container, MainFragment())
+      }
     }
   }
 }
