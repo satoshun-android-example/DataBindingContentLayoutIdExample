@@ -15,4 +15,8 @@ fun <T : ViewDataBinding> ComponentActivity.bindView(): T =
 private fun Activity.getContentView(): View =
   findViewById<ViewGroup>(android.R.id.content)[0]
 
+fun <T : ViewDataBinding> ComponentActivity.bindLazyView() = lazy<T> {
+  bindView()
+}
+
 fun <T : ViewDataBinding> Fragment.bindView(): T = DataBindingUtil.bind(view!!)!!
